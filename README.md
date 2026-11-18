@@ -10,7 +10,8 @@ usa) e a página do site, em `docs/`.
 
 ## Instalar
 
-1. Baixe o [Lastro.dmg](https://github.com/Studios-Coxa/lastro-releases/releases/latest/download/Lastro.dmg).
+1. Baixe o instalador (`Lastro-<versão>.dmg`) pelo [site](https://studios-coxa.github.io/lastro-releases/) ou na
+   página do [último release](https://github.com/Studios-Coxa/lastro-releases/releases/latest).
 2. Abra o arquivo e arraste o Lastro para a pasta Aplicativos.
 3. Abra o Lastro pela pasta Aplicativos.
 

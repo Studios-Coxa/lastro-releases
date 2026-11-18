@@ -174,7 +174,7 @@
       <a href="#instalar">Instalar</a>
       <a href="#novidades">Novidades</a>
     </nav>
-    <a class="download small" href="https://github.com/Studios-Coxa/lastro-releases/releases/latest/download/Lastro.dmg">
+    <a class="download small" data-dmg href="https://github.com/Studios-Coxa/lastro-releases/releases/latest">
       <svg aria-hidden="true"><use href="#download-icon"/></svg>Baixar
     </a>
   </div>
@@ -185,7 +185,7 @@
     <p class="eyebrow">Para macOS</p>
     <h1>Seu dinheiro inteiro, numa tela só.</h1>
     <p class="lede">O Lastro acompanha CDBs, ações, FIIs e ETFs da B3, proventos, conta, cartões, dívidas e metas. As contas partem do que você comprou e de quanto pagou, e tudo fica guardado só no seu Mac.</p>
-    <a class="download" href="https://github.com/Studios-Coxa/lastro-releases/releases/latest/download/Lastro.dmg">
+    <a class="download" data-dmg href="https://github.com/Studios-Coxa/lastro-releases/releases/latest">
       <svg aria-hidden="true"><use href="#download-icon"/></svg>Baixar para macOS
     </a>
     <p class="meta"><span id="version"></span>macOS 14 ou mais novo · Apple Silicon e Intel · sem conta e sem assinatura</p>
@@ -310,7 +310,7 @@
   <section id="instalar" class="wrap">
     <h2>Instalar leva um minuto.</h2>
     <ol class="steps">
-      <li><b>Baixe</b>O arquivo <a href="https://github.com/Studios-Coxa/lastro-releases/releases/latest/download/Lastro.dmg">Lastro.dmg</a> tem a versão mais recente.</li>
+      <li><b>Baixe</b>O instalador <a data-dmg data-dmg-name href="https://github.com/Studios-Coxa/lastro-releases/releases/latest">da versão mais recente</a> é um arquivo .dmg.</li>
       <li><b>Arraste</b>Abra o arquivo e arraste o Lastro para a pasta Aplicativos.</li>
       <li><b>Abra</b>Abra o Lastro pela pasta Aplicativos e crie o seu perfil.</li>
     </ol>
@@ -327,7 +327,7 @@
   <div class="closing wrap">
     <img src="assets/icon.png" alt="" width="96" height="96">
     <h2>Comece pelo que você já tem.</h2>
-    <a class="download" href="https://github.com/Studios-Coxa/lastro-releases/releases/latest/download/Lastro.dmg">
+    <a class="download" data-dmg href="https://github.com/Studios-Coxa/lastro-releases/releases/latest">
       <svg aria-hidden="true"><use href="#download-icon"/></svg>Baixar para macOS
     </a>
   </div>
@@ -341,7 +341,8 @@
 </footer>
 
 <script>
-// Versão atual e notas das últimas versões, direto dos releases do GitHub. Sem resposta, a página fica como está.
+// Versão atual, link do instalador e notas das últimas versões, direto dos releases do GitHub.
+// Sem resposta, a página fica como está e os botões levam à página do último release.
 (async () => {
   try {
     const response = await fetch("https://api.github.com/repos/Studios-Coxa/lastro-releases/releases?per_page=4");
@@ -350,6 +351,16 @@
     if (!releases.length) return;
 
     const version = releases[0].tag_name.replace(/^v/, "");
+
+    // Os botões de download apontam direto para o instalador da versão (Lastro-<versão>.dmg).
+    const dmg = (releases[0].assets || []).find(a => /^Lastro-.*\.dmg$/.test(a.name))
+      || (releases[0].assets || []).find(a => a.name.endsWith(".dmg"));
+    if (dmg) {
+      for (const link of document.querySelectorAll("[data-dmg]")) {
+        link.href = dmg.browser_download_url;
+        if (link.hasAttribute("data-dmg-name")) link.textContent = dmg.name;
+      }
+    }
     const slot = document.getElementById("version");
     const strong = document.createElement("b");
     strong.textContent = "Versão " + version;
