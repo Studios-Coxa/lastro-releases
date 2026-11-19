@@ -1,7 +1,7 @@
 # Lastro
 
-App nativo de macOS para acompanhar investimentos (renda fixa e B3), proventos, conta, cartões, dívidas e metas.
-Os dados ficam só no seu Mac.
+App para acompanhar investimentos (renda fixa e B3), proventos, conta, cartões, dívidas e metas.
+Os dados ficam só no seu computador.
 
 **Site, com telas do app e download: [studios-coxa.github.io/lastro-releases](https://studios-coxa.github.io/lastro-releases/)**
 
